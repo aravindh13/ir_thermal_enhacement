@@ -3,8 +3,8 @@
 ## 1. Abstract
 Thermal (infrared) cameras produce low-resolution, low-detail images. This project trains a convolutional
 super-resolution network to upscale grayscale thermal images by 4x and compares it with bicubic interpolation
-on the LLVIP infrared dataset. Result: PSNR **<FINAL_PSNR>** dB / SSIM **<FINAL_SSIM>** versus
-**<BICUBIC_PSNR>** dB / **<BICUBIC_SSIM>** for bicubic (100 test images).
+on the LLVIP infrared dataset. Result: PSNR **39.88** dB / SSIM **0.9830** versus
+**34.71** dB / **0.9602** for bicubic (100 test images).
 
 ## 2. Problem and Motivation
 Thermal sensors are costly at high resolution. Software super-resolution recovers detail from cheaper
@@ -32,17 +32,16 @@ low-resolution captures, helping detection, surveillance and night-time percepti
 ## 6. Results
 | Method | PSNR (dB) | SSIM |
 |---|---|---|
-| Bicubic | <BICUBIC_PSNR> | <BICUBIC_SSIM> |
-| EDSR-lite (ours) | <FINAL_PSNR> | <FINAL_SSIM> |
+| Bicubic | 34.71 | 0.9602 |
+| EDSR-lite (ours) | 39.88 | 0.9830 |
 
-Early training check (20 test images): bicubic 37.04 dB / 0.9798; model 39.63 dB / 0.9857 after epoch 1
-and 40.50 dB / 0.9886 after epoch 2.
+Training progress (20-image quick check each epoch, bicubic 37.04 dB / 0.9798): epoch 1 gave 39.63 dB / 0.9857, epoch 2 gave 40.50 dB / 0.9886, and after 87 epochs (120 min) 42.11 dB / 0.9914. The final table uses 100 evenly spaced test images, which are harder on average than the 20-image check, so both methods score lower there.
 
 Figures: side-by-side (bicubic | ours | ground truth) in `figures/cmp_0.png` ... `cmp_4.png`.
 
 ## 7. Discussion
 - The network recovers edges and fine structure that bicubic blurs.
-- Gain over bicubic: <GAIN> dB PSNR.
+- Gain over bicubic: 5.17 dB PSNR.
 - L1 training favours PSNR/SSIM fidelity; GAN-based methods (Real-ESRGAN) look sharper but are less faithful.
 
 ## 8. Limitations
