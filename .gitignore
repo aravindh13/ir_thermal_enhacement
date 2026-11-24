@@ -1,0 +1,15 @@
+# dataset and large files
+data/
+*.zip
+*.tar
+*.tar.gz
+*.pt
+*.pth
+figures/
+# python / tooling
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.qodo/
+.claude/
+.env
