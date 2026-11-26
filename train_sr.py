@@ -3,7 +3,6 @@ Makes LR on the fly (bicubic), trains EDSR-lite, saves checkpoints, reports PSNR
 import glob, os, random, time
 import numpy as np, torch, torch.nn as nn, torch.nn.functional as F
 from PIL import Image
-from skimage.metrics import structural_similarity
 
 DATA = "/kaggle/input"          # searched recursively for train/ and test/
 OUT = "/kaggle/working"
@@ -54,6 +53,7 @@ def psnr(a, b): return 10 * np.log10(1 / max(np.mean((a - b) ** 2), 1e-10))
 
 @torch.no_grad()
 def evaluate(model, files, save_dir=None):
+    from skimage.metrics import structural_similarity  # lazy: inference (predict.py) doesn't need it
     model.eval(); r = {"bicubic": [], "model": []}
     for k, f in enumerate(files):
         hr = Image.open(f).convert("L"); hr = hr.crop((0, 0, hr.width // 4 * 4, hr.height // 4 * 4))
