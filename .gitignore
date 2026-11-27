@@ -14,3 +14,9 @@ __pycache__/
 .claude/
 .env
 PHASE_PLAN.md
+# local predict.py test outputs
+test_lr.png
+test_sr.png
+# browser test artifacts
+.playwright-mcp/
+.pytest_cache/
